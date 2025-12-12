@@ -996,6 +996,133 @@
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
         }
 
+        /* ===== SYNTHESE IMAGE DISPLAY ===== */
+        .synthese-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.3), rgba(var(--secondary-rgb), 0.3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .synthese-image-card img:hover ~ .synthese-image-overlay,
+        .synthese-image-overlay:hover {
+            opacity: 1;
+        }
+
+        .synthese-zoom-icon {
+            font-size: 32px;
+            color: white;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+        }
+
+        /* ===== SYNTHESE MODAL ===== */
+        .synthese-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .synthese-modal.active {
+            display: flex;
+        }
+
+        .synthese-modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .synthese-modal-image {
+            max-width: 80vw;
+            max-height: 75vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s;
+            cursor: zoom-in;
+        }
+
+        .synthese-modal-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            background: rgba(var(--primary-rgb), 0.15);
+            padding: 12px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(var(--primary-rgb), 0.25);
+        }
+
+        .synthese-zoom-btn {
+            background: rgba(var(--primary-rgb), 0.25);
+            border: 1px solid rgba(var(--primary-rgb), 0.4);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .synthese-zoom-btn:hover {
+            background: rgba(var(--primary-rgb), 0.35);
+            transform: scale(1.05);
+        }
+
+        .synthese-zoom-level {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .synthese-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(var(--accent-rgb), 0.8);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.4);
+        }
+
+        .synthese-close-btn:hover {
+            background: rgba(var(--accent-rgb), 1);
+            transform: scale(1.1);
+        }
+
         /* ===== VEILLE ===== */
         .veille-container {
             background: var(--glass);
@@ -1126,6 +1253,172 @@
             color: var(--highlight);
         }
 
+        /* ===== TABLEAU DE SYNTHÈSE ===== */
+        .synthese-container {
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 40px;
+            box-shadow: 0 8px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .synthese-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+            align-items: center;
+        }
+
+        .synthese-image-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.25);
+            aspect-ratio: 4/3;
+            position: relative;
+        }
+
+        .synthese-image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .synthese-image-card img:hover {
+            transform: scale(1.05);
+        }
+
+        .synthese-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .synthese-content p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .synthese-section {
+            margin-bottom: 40px;
+        }
+
+        .synthese-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--text);
+        }
+
+        .synthese-section h3 i {
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        .synthese-items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .synthese-item {
+            display: flex;
+            gap: 18px;
+            padding: 20px;
+            background: rgba(var(--primary-rgb), 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(var(--primary-rgb), 0.1);
+            border-radius: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .synthese-item:hover {
+            background: rgba(var(--primary-rgb), 0.1);
+            transform: translateX(5px);
+            border-color: rgba(var(--primary-rgb), 0.2);
+        }
+
+        .synthese-dot {
+            width: 14px;
+            height: 14px;
+            background: var(--primary);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 4px;
+            box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.4);
+        }
+
+        .synthese-item-content h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .synthese-date {
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .synthese-item-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .source-card {
+            padding: 24px;
+            background: rgba(var(--primary-rgb), 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(var(--primary-rgb), 0.14);
+            border-radius: 14px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .source-card:hover {
+            background: rgba(var(--primary-rgb), 0.15);
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.2);
+            border-color: rgba(var(--primary-rgb), 0.22);
+        }
+
+        .source-card i {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .source-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .source-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
         /* ===== REVEAL ANIMATION ===== */
         .reveal {
             opacity: 0;
@@ -1162,6 +1455,14 @@
 
             .iframe-container {
                 height: 400px;
+            }
+
+            .synthese-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sources-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -1205,6 +1506,19 @@
             .veille-controls {
                 width: 100%;
                 justify-content: flex-start;
+            }
+
+            .synthese-container {
+                padding: 25px;
+            }
+
+            .synthese-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .sources-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -1253,6 +1567,10 @@
                 <i class="fas fa-rss"></i>
                 <span>Veille</span>
             </a>
+            <a href="#tableau-synthese" class="nav-link">
+                <i class="fas fa-table"></i>
+                <span>Tableau Synthèse</span>
+            </a>
             <a href="#experience" class="nav-link">
                 <i class="fas fa-briefcase"></i>
                 <span>Expérience</span>
@@ -1286,6 +1604,7 @@
             <a href="#about" class="mobile-nav-link"><i class="fas fa-user"></i></a>
             <a href="#skills" class="mobile-nav-link"><i class="fas fa-code"></i></a>
             <a href="#projects" class="mobile-nav-link"><i class="fas fa-folder"></i></a>
+            <a href="#tableau-synthese" class="mobile-nav-link"><i class="fas fa-table"></i></a>
             <a href="#contact" class="mobile-nav-link"><i class="fas fa-envelope"></i></a>
         </div>
     </div>
@@ -1808,6 +2127,53 @@
 
             <div class="separator"></div>
 
+            <!-- Tableau de Synthèse -->
+            <section id="tableau-synthese" class="section">
+                <div class="section-header reveal">
+                    <div class="section-tag">Synthèse</div>
+                    <h2 class="section-title">Tableau de Synthèse</h2>
+                    <p class="section-description">Événements, veille informatique et sources d'information clés</p>
+                </div>
+
+                <div class="synthese-container reveal">
+                    <div class="synthese-grid">
+                        <div class="synthese-image-card" id="syntheseImageCard">
+                            <img src="Tableau de synthèse.jpg" alt="Tableau de Synthèse" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 400%22%3E%3Crect fill=%22%23d87a2d%22 width=%22600%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-size=%2240%22 font-weight=%22bold%22%3ETableau de Synthèse%3C/text%3E%3C/svg%3E'">\n                            <div class="synthese-image-overlay">\n                                <i class="fas fa-search-plus synthese-zoom-icon"></i>\n                            </div>
+                        </div>
+                        <div class="synthese-content">
+                            <h3>Description</h3>
+                            <p>Mon tableau de synthèse regroupe les informations essentielles de ma veille informatique, les événements clés auxquels j'ai participé et les sources d'information que je suis régulièrement. Cet outil me permet de consolider les connaissances acquises et de rester informée sur les dernières tendances technologiques.</p>
+                        </div>
+                    </div>
+
+                    <div class="synthese-section reveal">
+                        <h3><i class="fas fa-calendar-alt"></i> Événements</h3>
+                        <div class="synthese-items">
+                            <div class="synthese-item">
+                                <div class="synthese-dot"></div>
+                                <div class="synthese-item-content">
+                                    <h4>Salon Open Source Experience</h4>
+                                    <p class="synthese-date">Décembre 2025</p>
+                                    <p>Rencontre de professionnel et échange dans le domaine du réseau de la sécurité du développement infrastructures etc...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="synthese-section reveal">
+                        <h3><i class="fas fa-link"></i> Sources d'Information</h3>
+                        <div class="sources-grid">
+                            <div class="source-card">
+                                <i class="fas fa-newspaper"></i>
+                                <h4>Opensources Exeprience</h4>
+                                <p>Actualités, conférence quotidiennes sur l'informatique et l'infrastructure</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="separator"></div>
+
             <!-- Experience -->
             <section id="experience" class="section">
                 <div class="section-header reveal">
@@ -1898,6 +2264,25 @@
                 </button>
                 <span class="cert-zoom-level" id="zoomLevel">100%</span>
                 <button class="cert-zoom-btn" id="zoomOutBtn">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Synthese Image -->
+    <div class="synthese-modal" id="syntheseModal">
+        <div class="synthese-modal-content">
+            <button class="synthese-close-btn" id="syntheseCloseBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="" alt="Tableau de Synthèse" class="synthese-modal-image" id="syntheseImage">
+            <div class="synthese-modal-controls">
+                <button class="synthese-zoom-btn" id="syntheseZoomInBtn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <span class="synthese-zoom-level" id="syntheseZoomLevel">100%</span>
+                <button class="synthese-zoom-btn" id="syntheseZoomOutBtn">
                     <i class="fas fa-minus"></i>
                 </button>
             </div>
@@ -2034,6 +2419,87 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && certModal.classList.contains('active')) {
                 certModal.classList.remove('active');
+            }
+        });
+
+        // Synthese Modal Logic (same as certifications but for tableau de synthèse)
+        const syntheseModal = document.getElementById('syntheseModal');
+        const syntheseImage = document.getElementById('syntheseImage');
+        const syntheseCloseBtn = document.getElementById('syntheseCloseBtn');
+        const syntheseZoomInBtn = document.getElementById('syntheseZoomInBtn');
+        const syntheseZoomOutBtn = document.getElementById('syntheseZoomOutBtn');
+        const syntheseZoomLevel = document.getElementById('syntheseZoomLevel');
+        const syntheseImageCard = document.getElementById('syntheseImageCard');
+
+        let syntheseCurrentZoom = 1;
+
+        if (syntheseImageCard) {
+            // Click only on the image or overlay to open modal
+            const syntheseImg = syntheseImageCard.querySelector('img');
+            const syntheseOverlay = syntheseImageCard.querySelector('.synthese-image-overlay');
+            
+            if (syntheseImg) {
+                syntheseImg.addEventListener('click', openSynthesisModal);
+            }
+            if (syntheseOverlay) {
+                syntheseOverlay.addEventListener('click', openSynthesisModal);
+            }
+        }
+
+        function openSynthesisModal() {
+            const syntheseImg = syntheseImageCard.querySelector('img');
+            const imgSrc = syntheseImg.src;
+            const imgAlt = syntheseImg.alt;
+            syntheseImage.src = imgSrc;
+            syntheseImage.alt = imgAlt;
+            syntheseModal.classList.add('active');
+            syntheseCurrentZoom = 1;
+            syntheseImage.style.transform = `scale(${syntheseCurrentZoom})`;
+            syntheseZoomLevel.innerText = `${Math.round(syntheseCurrentZoom * 100)}%`;
+        }
+
+        if (syntheseCloseBtn) {
+            syntheseCloseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                syntheseModal.classList.remove('active');
+            });
+        }
+
+        if (syntheseZoomInBtn) {
+            syntheseZoomInBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (syntheseCurrentZoom < 3) {
+                    syntheseCurrentZoom += 0.2;
+                    syntheseImage.style.transform = `scale(${syntheseCurrentZoom})`;
+                    syntheseZoomLevel.innerText = `${Math.round(syntheseCurrentZoom * 100)}%`;
+                }
+            });
+        }
+
+        if (syntheseZoomOutBtn) {
+            syntheseZoomOutBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (syntheseCurrentZoom > 1) {
+                    syntheseCurrentZoom = Math.max(1, syntheseCurrentZoom - 0.2);
+                    syntheseImage.style.transform = `scale(${syntheseCurrentZoom})`;
+                    syntheseZoomLevel.innerText = `${Math.round(syntheseCurrentZoom * 100)}%`;
+                }
+            });
+        }
+
+        // Close synthese modal on outside click (click on the dark background only)
+        if (syntheseModal) {
+            syntheseModal.addEventListener('click', (e) => {
+                if (e.target === syntheseModal) {
+                    syntheseModal.classList.remove('active');
+                }
+            });
+        }
+
+        // Close synthese modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && syntheseModal && syntheseModal.classList.contains('active')) {
+                syntheseModal.classList.remove('active');
             }
         });
     </script>
